@@ -27,6 +27,10 @@ export class AppComponent {
       cidade: this.cidade,
     };
     this.atividade.salvar(pessoa);
+    this.nome = null;
+    this.sexo = null;
+    this.idade = null;
+    this.cidade = null;
   }
 
 
