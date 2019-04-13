@@ -18,42 +18,38 @@ export class AtividadeServiceService {
       lista.push(pessoa.cidade)
   */
     this.pessoas.push(pessoa)
-    let pessoas:Pessoa[]=[];
-    if(localStorage.getItem('pessoas') === null ){
+    let pessoas:Pessoa[] = [];
+    if(localStorage.getItem('pessoas') === null ) {
       pessoas.push(pessoa);
-      localStorage.setItem('pessoas', JSON.stringify(pessoas))
-    }
-    else{
+      localStorage.setItem('pessoas', JSON.stringify(pessoas));
+    } else {
       pessoas = JSON.parse(localStorage.getItem('pessoas'))
       pessoas.push(pessoa)
       localStorage.setItem('pessoas', JSON.stringify(pessoas));
     }
 
   }
-  
-  pessoaMaisVelha(){
-    let pessoas:Pessoa[]=[];
+  pessoaMaisVelha() {
+    let pessoas: Pessoa[] = [];
     let maiorIdade = 0;
-    let pessoa:Pessoa= null;
+    let pessoa: Pessoa = null;
     pessoas = JSON.parse(localStorage.getItem('pessoas'));
-    
-    
-    for(var i=0; i< pessoas.length; i++){
-      if(pessoas[i].idade> maiorIdade){
+    for(var i = 0; i < pessoas.length; i++) {
+      if (pessoas[i].idade > maiorIdade) {
         maiorIdade = pessoas[i].idade;
         pessoa = pessoas[i];
       }
     }
-    return pessoa
+    return pessoa;
 
   }
   pessoaMaisNova(){
-    let pessoas:Pessoa[]=[];
+    let pessoas: Pessoa[] = [];
     let menorIdade = 120;
-    let pessoa:Pessoa= null;
-    pessoas = JSON.parse(localStorage.getItem('pessoas'));  
-    for(var i=0; i< pessoas.length; i++){
-      if(pessoas[i].idade< menorIdade){
+    let pessoa: Pessoa = null;
+    pessoas = JSON.parse(localStorage.getItem('pessoas'));
+    for(var  i= 0; i < pessoas.length; i++) {
+      if(pessoas[i].idade < menorIdade) {
         menorIdade = pessoas[i].idade;
         pessoa = pessoas[i];
       }
@@ -61,23 +57,25 @@ export class AtividadeServiceService {
     return pessoa
   }
 
-  mediaIdadeSexo(sexo){
-    let pessoas:Pessoa[]=[];
+  mediaIdadeSexo(sexo) {
+    let pessoas: Pessoa [] = [];
     let idadeMedia = 0;
     let qtPessoas = 0
-    let pessoa:Pessoa= null;
+    let pessoa: Pessoa = null;
     pessoas = JSON.parse(localStorage.getItem('pessoas'));
-    for(var i=0; i< pessoas.length; i++){
-      if (pessoas[i].sexo == sexo){
+    for(var i = 0; i < pessoas.length; i++) {
+      if (pessoas[i].sexo == sexo) {
         qtPessoas ++;
         idadeMedia += pessoas[i].idade
       }
     }
-    return idadeMedia = idadeMedia/qtPessoas
+    if (qtPessoas>0){
+      return idadeMedia = idadeMedia/qtPessoas;
+    }
   }
 
   mediaIdadeCidade(cidade){
-    let pessoas:Pessoa[]=[];
+    let pessoas:Pessoa[] = [];
     let idadeMedia = 0;
     let qtPessoas = 0
     let pessoa:Pessoa= null;
@@ -85,30 +83,34 @@ export class AtividadeServiceService {
     for(var i=0; i< pessoas.length; i++){
       if (pessoas[i].cidade == cidade){
         qtPessoas ++;
-        idadeMedia += pessoas[i].idade
+        idadeMedia += pessoas[i].idade;
       }
     }
-    return idadeMedia = idadeMedia/qtPessoas
+    if (qtPessoas > 0) {
+      return idadeMedia = idadeMedia/qtPessoas;
+    }
   }
 
-  PorcentagemSexoCidade(cidade,sexo){
-    let pessoas:Pessoa[]=[];
+  PorcentagemSexoCidade(cidade, sexo) {
+    let pessoas: Pessoa[] = [];
     let porcentagem = 0;
     let qtPessoas = 0
-    let totalPessoas=0;
-    let pessoa:Pessoa= null;
+    let totalPessoas = 0;
+    let pessoa: Pessoa = null;
     pessoas = JSON.parse(localStorage.getItem('pessoas'));
-    for(var i=0; i< pessoas.length; i++){
-      if (pessoas[i].cidade ==  cidade){ 
+    for(var i=0; i< pessoas.length; i++) {
+      if (pessoas[i].cidade ==  cidade) {
           totalPessoas ++;
-        if(pessoas[i].sexo == sexo){
+        if (pessoas[i].sexo == sexo){
           qtPessoas ++;
         }
-      } 
+      }
       
     }
     porcentagem = (qtPessoas*100)/totalPessoas
-    return porcentagem
+    if (qtPessoas > 0) {
+      return porcentagem;
+    }
   }
 
 
